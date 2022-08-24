@@ -1,0 +1,69 @@
+关系型数据
+易于维护， 易操作, 严格
+
+
+非关系型数据库
+
+
+
+sql语句
+
+插入，更新
+
+INSERT INTO `student`(`name`, `score`, `gender`, `class_id`) VALUES ('xiaoming',80,1,2)
+
+...
+
+查询
+查两列
+SELECT name score FROM `student`
+
+条件查询
+SELECT * FROM `student` WHERE score >=80
+SELECT * FROM `student` WHERE score >=90 AND class_id=0
+
+模糊查询
+SELECT * FROM `student` WHERE name like '%k%'      // 前面任意 后面任意， 包含k字符
+
+排序
+SELECT * FROM `student` ORDER BY score
+SELECT * FROM `student` ORDER BY score DESC
+
+分页查询
+SELECT * FROM `student` LIMIT 2 OFFSET 0
+
+记录条数
+SELECT COUNT(*) FROM `student` WHERE 1
+SELECT COUNT(*) mynum FROM `student` WHERE 1      // 起别名 mynum
+
+
+多表查询
+SELECT * FROM `student`, classes     // 从两张表中查询，要小心， 笛卡尔查询， 返回结果是乘积
+
+
+联表查询
+// INNER JOIN 常用 内连接
+SELECT student.name, student.class_id, classes.name FROM `student` INNER JOIN classes ON student.class_id=classes.id
+// 起别名查询
+SELECT s.name, s.class_id, c.name FROM `student` s INNER JOIN classes c ON s.class_id=c.id
+
+// 字段起别名(解决重名)
+SELECT s.name sname, s.class_id, c.name cname FROM `student` s INNER JOIN classes c ON s.class_id=c.id
+
+问题：A表有B表没有的会查不到
+// 左连接， 空的填充NULL
+SELECT student.name, student.class_id, classes.name FROM `student` LEFT JOIN classes ON student.class_id=classes.id
+//右连接 
+
+外连接
+
+
+外键约束
+InnoDN支持事务， MylSAM不支持事务， 需要修改
+InnoDB支持外键， MylSAM不支持， 包含外键的InnoDB表转SYISAM会失败
+
+约束：
+RESTRICT： 无法添加不符合的数据， 外键无法修改
+CASCADE： 级联， 修改一个表，会同时影响关联的表格
+
+
