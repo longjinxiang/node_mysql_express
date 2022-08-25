@@ -67,3 +67,14 @@ RESTRICT： 无法添加不符合的数据， 外键无法修改
 CASCADE： 级联， 修改一个表，会同时影响关联的表格
 
 
+
+//// 使用typeOrm
+
+npm install -g typeorm
+
+typeorm init
+
+npm start 执行数据库操作
+
+看文档
+定义实体和关系
